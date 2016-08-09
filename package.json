@@ -1,0 +1,40 @@
+{
+  "name": "quake",
+  "version": "",
+  "description": "A task runner.",
+  "homepage": "https://github.com/legodude17/quake#readme",
+  "author": {
+    "name": "JDB",
+    "email": "",
+    "url": ""
+  },
+  "main": "lib/index.js",
+  "bin": "cli.js",
+  "keywords": [
+    "task",
+    "run",
+    "runner"
+  ],
+  "dependencies": {
+    "cli-spinners": "^0.2.0",
+    "log-symbols": "^1.0.2",
+    "log-update": "^1.0.2"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true
+    }
+  },
+  "scripts": {
+    "lint": "eslint **/*.js --fix --parser-options '{ecmaVersion: 6}'",
+    "test": "node test.js"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/legodude17/quake"
+  },
+  "bugs": {
+    "url": ""
+  }
+}
