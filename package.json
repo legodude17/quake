@@ -17,8 +17,10 @@
   ],
   "dependencies": {
     "cli-spinners": "^0.2.0",
+    "glob": "^7.0.5",
     "log-symbols": "^1.0.2",
-    "log-update": "^1.0.2"
+    "log-update": "^1.0.2",
+    "orchestrator": "^0.3.7"
   },
   "eslintConfig": {
     "env": {

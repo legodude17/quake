@@ -1,25 +1,30 @@
 "use strict";
-var quake = require('.');
-var TaskDisplayManager = require('./lib/TaskDisplayManager');
-var manager = new TaskDisplayManager(['Buy ingredients', 'Make cake', 'Eat cake']);
-function wait(fn) {
-  setTimeout(fn, 1000);
-}
-var current = manager.run('Buy ingredients')
-wait(function () {
-  current.succeed();
-  current = manager.run('Make cake');
-  manager.add('Profit');
-  wait(function () {
-    current.succeed();
-    current = manager.run('Eat cake')
-    wait(function () {
-      current.succeed();
-      current = manager.run('Profit')
-      wait(function () {
-        current.fail();
-        wait(process.exit);
-      });
+const Quake = require('./lib/Quake');
+var quake = new Quake();
+quake.add('Buy ingredients', function (cb) {
+  setTimeout(function () {
+    quake.add('Profit', ['Eat cake'], function (cb) {
+      setTimeout(function () {
+        cb(new Error('Nope'));
+      }, 1000);
     });
-  });
+    quake.start('Profit');
+    cb();
+  }, 1000);
 });
+quake.add('Make cake', ['Buy ingredients'], function (cb) {
+  setTimeout(cb, 2000);
+});
+quake.add('Eat cake', ['Make cake'], function (cb) {
+  setTimeout(cb, 3000);
+});
+quake.add('Make lemonade', ['Buy ingredients'], function (cb) {
+  setTimeout(cb, 500);
+});
+quake.add('Drink lemonade', ['Make lemonade'], function (cb) {
+  setTimeout(cb, 4000);
+});
+quake.add('Be happy', ['Eat cake', 'Drink lemonade'], function (cb) {
+  setTimeout(cb, 1234);
+});
+quake.start('Be happy');
