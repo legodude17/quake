@@ -26,7 +26,7 @@
     }
   },
   "scripts": {
-    "lint": "eslint **/*.js --fix --parser-options '{ecmaVersion: 6}'",
+    "lint": "eslint lib/*.js --fix --parser-options '{ecmaVersion: 6}'",
     "test": "node test.js"
   },
   "license": "MIT",
