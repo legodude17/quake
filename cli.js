@@ -44,7 +44,7 @@ if (typeof func !== 'function') {
 }
 var quake = create();
 func(quake.passer);
-quake._start(program.task || 'default');
+quake._start(program.args[0] || 'default');
 function exit(message) {
   if (message) {
     console.error(logSymbols.error + '  ' + message);
