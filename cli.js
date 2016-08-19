@@ -6,7 +6,7 @@ const chalk = require('chalk');
 const path = require('path');
 const logSymbols = require('log-symbols');
 const fs = require('fs');
-const filesToLookFor = ['Quakefile.js', 'quakefile.js', 'Taskfile.js', 'taskfile.js']
+const filesToLookFor = ['Quakefile.js', 'quakefile.js', 'Taskfile.js', 'taskfile.js'];
 program
   .version(require('./package.json').version)
   .usage('[task] [options]')
@@ -44,7 +44,31 @@ if (typeof func !== 'function') {
 }
 var quake = create();
 func(quake.passer);
-quake._start(program.args[0] || 'default');
+var toDo = quake.files.length;
+var done = 0;
+quake._start(program.args[0] || 'default', function (err, msg) {
+  if (err) {
+    if (msg === 'task "default" is not defined') {
+      return exit("Export of task file " + chalk.yellow(result) + ' failed to define a "default" task. Please choose a different file with ' + chalk.yellow('--file') + ' or a different task with ' + chalk.yellow('--task') + '.');
+    }
+    return exit(msg);
+  }
+  function next(err) {
+    if (err) {
+      return exit(err.message || err);
+    }
+    done++;
+    if (done >= toDo) {
+      console.log(msg);
+      exit();
+    }
+  }
+  if (!quake.files.length) {
+    return next();
+  }
+  quake.files.forEach((v) => v.write(next));
+});
+
 function exit(message) {
   if (message) {
     console.error(logSymbols.error + '  ' + message);
