@@ -16,12 +16,13 @@
     "runner"
   ],
   "dependencies": {
-    "cli-spinners": "^0.2.0",
-    "commander": "^2.9.0",
+    "async-done": "^1.2.2",
     "glob": "^7.0.5",
+    "listr-update-renderer": "^0.1.2",
+    "listr-verbose-renderer": "^0.2.1",
     "log-symbols": "^1.0.2",
-    "log-update": "^1.0.2",
-    "orchestrator": "^0.3.7"
+    "orchestrator": "^0.3.7",
+    "rxjs": "^5.0.0-rc.5"
   },
   "eslintConfig": {
     "env": {
