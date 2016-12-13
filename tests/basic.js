@@ -1,23 +1,34 @@
 "use strict";
-function wait(ms) {
-  return function (cb) {
-    setTimeout(cb, ms);
-  };
-}
-function fail(msg, ms) {
-  return function (cb) {
-    setTimeout(function () {
-      cb(new Error(msg));
-    }, ms);
+const Quake = require('../lib/Quake');
+
+const quake = new Quake("update");
+
+function wait(time, message) {
+  return done => {
+    setTimeout(() => {
+      done(null, message);
+    }, time);
   }
 }
-module.exports = function (quake) {
-  quake.add('Make cake', ['Get ingredients'], wait(1000));
-  quake.add('Eat cake', ['Make cake'], wait(1000));
-  quake.add('Make lemonade', ['Get ingredients'], wait(1000));
-  quake.add('Drink lemonade', ['Make lemonade'], wait(1000));
-  quake.add('Get ingredients', wait(1000));
-  quake.add('Be happy', ['Drink lemonade', 'Eat cake'], wait(1000));
-  quake.add('Profit', ['Make lemonade'], fail('No profit for me', 2500));
-  quake.add('default', ['Profit', 'Be happy'])
-}
+
+quake.add("Task 1", wait(100, "Done!"));
+quake.add("Task 2", ["Task 1"], wait(500, "Done!"));
+quake.add("Task 3", ["Task 2"], wait(500, "Done!"));
+quake.add("Task 4", ["Task 3"], wait(500, "Done!"));
+quake.add("Task 5", ["Task 4"], wait(500, "Done!"));
+quake.add("Task 6", ["Task 1"], wait(500, "Done!"));
+quake.add("Task 7", ["Task 6"], wait(500, "Done!"));
+quake.add("Task 8", ["Task 7"], wait(500, "Done!"));
+quake.add("Task 9", ["Task 8"], wait(500, "Done!"));
+quake.add("Task 10", ["Task 9"], wait(500, "Done!"));
+quake.add("Task 11", ["Task 10"], wait(500, "Done!"));
+
+quake.start("Task 5", "Task 11", err => {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  } else {
+    console.log("All Done!");
+    process.exit(0);
+  }
+});
