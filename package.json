@@ -1,6 +1,6 @@
 {
-  "name": "quake",
-  "version": "",
+  "name": "quake-task",
+  "version": "1.0.0",
   "description": "A task runner.",
   "homepage": "https://github.com/legodude17/quake#readme",
   "author": {
