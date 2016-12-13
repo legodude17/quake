@@ -17,10 +17,11 @@ quake.add("Copy Palindrome", [
 
 quake.add("Ensure Palindrome", ["Copy Palindrome"], [
   quake.src("test/src/palindrome.txt"),
-  ...r(),
   quake.name(quake.sync(arg => [arg]), "Create Array"),
   quake.src("test/dist/palindrome.txt"),
   quake.name(quake.sync(args => assert.equal(args[0], args[1])), "Ensure Equal")
 ]);
+
+quake.on("error", () => process.exit(1));
 
 quake.start("Ensure Palindrome");
