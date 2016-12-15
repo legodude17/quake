@@ -16,14 +16,17 @@
     "runner"
   ],
   "dependencies": {
-    "async-done": "^1.2.2",
+    "end-of-stream": "^1.1.0",
     "glob": "^7.0.5",
     "listr-update-renderer": "^0.1.2",
     "listr-verbose-renderer": "^0.2.1",
     "log-symbols": "^1.0.2",
+    "next-tick": "^1.0.0",
+    "once": "^1.4.0",
     "orchestrator": "^0.3.7",
     "pretty-time": "^0.2.0",
-    "rxjs": "^5.0.0-rc.5"
+    "rxjs": "^5.0.0-rc.5",
+    "stream-exhaust": "^1.0.1"
   },
   "eslintConfig": {
     "env": {

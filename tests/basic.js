@@ -4,7 +4,7 @@ const Quake = require('../lib/Quake');
 const quake = new Quake("update");
 
 function wait(time, message) {
-  return done => {
+  return (res, done) => {
     setTimeout(() => {
       done(null, message);
     }, time);
