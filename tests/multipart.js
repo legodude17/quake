@@ -19,7 +19,7 @@ quake.add("Task 2", ["Task 1"], [wait(400, "Done!", "Step 1"), wait(400, "Done!"
 quake.add("Task 3", ["Task 2"], wait(500, "Done!"));
 quake.add("Task 4", ["Task 3"], [wait(400, "Done!", "Step 1"), wait(400, "Done!", "Step 2"), wait(400, "Done!", "Step 3")]);
 quake.add("Task 5", ["Task 4"], wait(500, "Done!"));
-quake.add("Task 6", ["Task 5"], [() => {
+quake.add("Task 6", ["Task 5"], [quake.name(() => {
   return new rx.Observable(function (subber) {
     var fn = quake.createTaskBar();
     var i = 0, id = setInterval(function () {
@@ -32,7 +32,7 @@ quake.add("Task 6", ["Task 5"], [() => {
       i++;
     }, 100);
   });
-}]);
+}, "Download File")]);
 
 quake.start("Task 6", err => {
   if (err) {
