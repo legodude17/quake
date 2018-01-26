@@ -16,7 +16,7 @@ events.forEach(e => {
 });
 c.then(function Task1(result, done) {
   setTimeout(() => {done(null, (result || 0) + 1); }, 100);
-})
+});
 c.then(function Task2(result, done) {
   setTimeout(() => {done(null, (result || 0) + 1); }, 100);
 });
